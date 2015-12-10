@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="0">
+    
+      <record model="product.bodega.origen" id="product_bodega_origen_1">
+        <field name="name">D.O. 1</field>
+      </record>
+
+
+      <!-- bodegas -->
+
+      <record model="product.bodega.bodega" id="bodega1">
+        <field name="name">Bodega 1</field>
+      </record>
+
+      <record model="product.bodega.bodega" id="bodega2">
+        <field name="name">Bodega 2</field>
+      </record>
+
+      
+    </data>
+</openerp>

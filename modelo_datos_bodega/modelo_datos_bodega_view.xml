@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+      <record id="product_template_form_view_datos_bodega" model="ir.ui.view">
+	<field name="name">Productos</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+	<field name="arch" type="xml">
+	  <xpath expr="//field[@name='list_price']" position="after">
+            <field name="origen" string="Origen"/>
+	    <field name="bodega" string="Bodega"/>
+
+	  </xpath>
+	</field>
+      </record>
+
+      <record id="product_template_search_view_datos_bodega" model="ir.ui.view">
+	 <field name="name">product.template.search</field>
+	 <field name="model">product.template</field>
+	 <field name="inherit_id" ref="product.product_template_search_view"/>
+	<field name="arch" type="xml">
+	  <xpath expr="//group[@string='Group by...']" position="inside">
+	    <filter string='Bodega' name="bodega" domain="[]" context="{'group_by' : 'bodega'}"/>
+	    <filter string='Origen' name="origen" domain="[]" context="{'group_by' : 'origen'}"/>
+	  </xpath>
+	  </field>
+       </record>
+
+
+       <record id="product_search_form_view_datos_bodega" model="ir.ui.view">
+	 <field name="name">product.product.search</field>
+	 <field name="model">product.product</field>
+	 <field name="inherit_id" ref="product.product_search_form_view"/>
+	<field name="arch" type="xml">
+	  <xpath expr="//group[@string='Group by...']" position="inside">
+	    <filter string='Bodega' name="bodega" domain="[]" context="{'group_by' : 'bodega'}"/>
+	    <filter string='Origen' name="origen" domain="[]" context="{'group_by' : 'origen'}"/>
+	  </xpath>
+	  </field>
+       </record>
+    </data>
+</openerp>
