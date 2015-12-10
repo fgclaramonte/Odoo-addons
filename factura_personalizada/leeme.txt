@@ -1,0 +1,10 @@
+Factura personaliada
+=====================
+
+En Configuración > Informes > Factura > Formato de papel,
+
+Crear un tipo nuevo (copiado de European A4): "A4 Factura Personalizada",
+Con margen superior: 10
+
+Asociar al informe : Factura
+
