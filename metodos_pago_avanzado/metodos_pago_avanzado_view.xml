@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+      <record id="view_partner_property_form_modelos" model="ir.ui.view">
+	<field name="name">res.partner.property.form.inherit</field>
+        <field name="model">res.partner</field>
+	<field name="inherit_id" ref="account.view_partner_property_form"/>	      
+	<field name="arch" type="xml">
+          <xpath expr="//field[@name='property_payment_term']" position="after">
+	    <field name="metodos_pago"/>
+	  </xpath>
+	</field>
+      </record>
+
+
+      <record id="invoice_form_modelos" model="ir.ui.view">
+	<field name="name">account.invoice.form</field>
+        <field name="model">account.invoice</field>
+	<field name="inherit_id" ref="account.invoice_form"/> 
+	<field name="arch" type="xml">
+          <xpath expr="//field[@name='payment_term']" position="after">
+	      <field name="metodos_pago" class="oe_inline"/>
+	  </xpath>
+	</field>
+      </record>
+
+      
+    </data>
+</openerp>

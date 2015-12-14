@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_metodos_pago_group,access_metodos_pago_user,model_metodos_pago,base.group_user,1,1,1,1
+

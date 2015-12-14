@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+      <record model="metodos.pago" id="metodos_pago_1">
+        <field name="name">Transferencia bancaria</field>
+      </record>
+      <record model="metodos.pago" id="metodos_pago_2">
+        <field name="name">Pago en efectivo</field>
+      </record>
+      <record model="metodos.pago" id="metodos_pago_3">
+        <field name="name">Cheque bancario</field>
+      </record>
+      <record model="metodos.pago" id="metodos_pago_4">
+        <field name="name">Pagaré bancario</field>
+      </record>
+      <record model="metodos.pago" id="metodos_pago_5">
+        <field name="name">Tarjeta de crédito</field>
+      </record>
+    </data>
+</openerp>
