@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_saleorder_document">
+
+  <t t-set="company" t-value="res_company"/>
+  <div class="page" style="background:url(/pedido_personalizado/static/img/agua.jpg) no-repeat;background-position: 120px 210px; ">
+    <div class="row">
+      <div class="col-xs-4" style="font-size:12pt;">
+	<b> <span style="color:#88b13e" t-field="company.name"/></b><br/>
+	<span t-field="company.street"/><br/>
+	<span t-field="company.zip"/> <span t-field="company.city"/><br/><br/>
+	NIF: <span t-field="company.vat"/><br/>
+	Teléfono: <span t-field="company.phone"/><br/>
+	<span t-field="company.email"/><br/>
+	<span t-field="company.website"/><br/>
+	<span t-field="company.rml_header1"/><br/>
+      </div>
+
+       <div class="" style="display: inline-block; vertical-align: middle;">
+	 <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 120px;"/>
+       </div>
+
+         <div  style="float:right;">
+           <h3>
+                <span style="color:#88b13e;" t-if="o.state not in ['draft','sent']">Pedido</span>
+                <span style="color:#88b13e;" t-if="o.state in ['draft','sent']">Presupuesto</span>
+	   </h3>
+
+	   <!--           <div class="row mt32 mb32" id="informations">-->
+           <div class="" id="informations">
+	         <b>Número:</b><span t-field="o.name"/>
+                <div t-if="o.client_order_ref" class="col-xs-3">
+                  <strong>Referencia:</strong>
+                  <p t-field="o.client_order_ref"/>
+                </div>
+                <div t-if="o.date_order">
+                  <strong t-if="o.state not in ['draft','sent']">Fecha de pedido:</strong>
+                  <strong t-if="o.state in ['draft','sent']">Fecha de presupuesto:</strong>
+                  <p t-field="o.date_order"/>
+                </div>
+		<p t-if="o.payment_term.note">
+		  <strong>Plazo de pago:</strong>
+                  <span t-field="o.payment_term.note"/>
+		</p>
+
+<!--
+                <div t-if="o.user_id.name" class="col-xs-3">
+                  <strong>vendedor:</strong>
+                  <p t-field="o.user_id.name"/>
+                </div>
+                <div t-if="o.payment_term" class="col-xs-3">
+                  <strong>Payment Term:</strong>
+                  <p t-field="o.payment_term"/>
+		  </div>
+-->
+           </div>
+	 </div> <!-- float:right-->
+
+	 <div class="row" style="margin-bottom:50px;">
+              <div class="col-xs-6 col-xs-offset-8" style="font-size:14pt;">
+                <br/><b>DATOS CLIENTE:</b><br/>
+                <span t-if="o.partner_id.name"> <span t-field="o.partner_id.name"/></span><br/>
+                <address t-field="o.partner_id" t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}' />
+                <span t-if="o.partner_id.vat"> <span t-field="o.partner_id.vat"/></span>
+              </div>
+         </div>
+	    
+	 
+	   <table class="table table-condensed">
+             <thead>
+               <tr>
+                 <th>Descripción</th>
+                 <th>Impuestos</th>
+                 <th class="text-right">Cantidad</th>
+                 <th class="text-right">Precio unidad</th>
+                 <th groups="sale.group_discount_per_so_line">Descuento (%)</th>
+                 <th class="text-right">Importe</th>
+               </tr>
+             </thead>
+
+	     <tbody class="sale_tbody">
+               <tr t-foreach="o.order_line" t-as="l">
+                 <td>
+                   <span t-field="l.name"/>
+                 </td>
+                 <td>
+                   <span t-esc="', '.join(map(lambda x: x.name, l.tax_id))"/>
+                 </td>
+                 <td class="text-right">
+                   <span t-field="l.product_uom_qty"/>
+                            <span groups="product.group_uom" t-field="l.product_uom"/>
+                 </td>
+                 <td class="text-right">
+                   <span t-field="l.price_unit"/>
+                 </td>
+                 <td groups="sale.group_discount_per_so_line">
+                   <span t-field="l.discount"/>
+                 </td>
+                 <td class="text-right">
+                            <span t-field="l.price_subtotal"
+                                  t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                 </td>
+               </tr>
+             </tbody>
+	   </table>
+
+            <div class="row" style="margin-bottom:50px;margin-top:50px;">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr class="border-black">
+                            <td><strong>Subtotal</strong></td>
+                            <td class="text-right">
+                                <span t-field="o.amount_untaxed"
+                                    t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                            </td>
+                        </tr>
+			<tr>
+                            <td>Impuestos</td>
+                            <td class="text-right">
+                                <span t-field="o.amount_tax"
+                                    t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                            </td>
+                        </tr>
+                        <tr class="border-black">
+                            <td><strong>Total</strong></td>
+                            <td class="text-right">
+                                <span t-field="o.amount_total"
+                                    t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                            </td>
+                        </tr>
+                    </table>
+		</div>
+            </div>
+	    
+            <div class="row" style="margin-bottom:50px;margin-top:50px;">
+            <p t-field="o.note" />
+            <div class="oe_structure"/>
+	    </div>
+	    
+          </div>
+	</div>
+
+</template>
+
+<template id="report_saleorder">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'pedido_personalizado.report_saleorder_document')"/>
+        </t>
+    </t>
+</template>
+      
+</data>
+</openerp>
