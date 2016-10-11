@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': 'Personalización genérico de informe de Factura para servicios',
-    'version': '8.0.0.1.0',
+    'version': '8.0.0.1.3',
     'author': 'Francisco M. García Claramonte',
     'category': 'garciac.es',
     'description': """

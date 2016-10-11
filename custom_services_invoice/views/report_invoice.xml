@@ -53,7 +53,7 @@
                         <th>Quantity</th>
                         <th class="text-right">Unit Price</th>
                         <th class="text-right" groups="sale.group_discount_per_so_line">Discount (%)</th>
-                        <!--<th class="text-right">Taxes</th>-->
+                        <th class="text-right">Taxes</th>
                         <th class="text-right">Amount</th>
                     </tr>
                 </thead>
@@ -68,10 +68,10 @@
                             <span t-field="l.price_unit"/>
                         </td>
                         <td class="text-right" groups="sale.group_discount_per_so_line"><span t-field="l.discount"/></td>
-                        <!-- <td class="text-right">
+                        <td class="text-right">
                             <span t-esc="', '.join(map(lambda x: x.name, l.invoice_line_tax_id))"/>
-                            </td>
-			-->
+                        </td>
+			
                         <td class="text-right">
                             <span t-field="l.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
                         </td>
@@ -91,9 +91,7 @@
                         <!-- <tr> -->
 			   <tr t-foreach="o.tax_line" t-as="t">
                                 <td><span t-field="t.name"/></td>
-                                <td class="text-right">
-                                    <span t-field="t.base" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
-                                </td>
+                                
                                 <td class="text-right">
                                     <span t-field="t.amount" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
                                 </td>
@@ -143,6 +141,14 @@
                 <strong>Comment:</strong>
                 <span t-field="o.comment"/>
             </p>
+	    <p t-if="o.partner_bank_id">
+	        <strong>Cuenta de pago:</strong>
+                <span t-field="o.partner_bank_id.acc_number"/>
+	    </p>
+	    <p t-if="o.partner_bank_id">
+		<strong> Código BIC/Swift:</strong>
+		<span t-field="o.partner_bank_id.bank_bic"/>
+	    </p>
             <p t-if="o.payment_term.note">
                 <strong>Payment Term:</strong>
                 <span t-field="o.payment_term.note"/>
