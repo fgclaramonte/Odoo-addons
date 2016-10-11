@@ -53,7 +53,7 @@
                         <th>Quantity</th>
                         <th class="text-right">Unit Price</th>
                         <th class="text-right" groups="sale.group_discount_per_so_line">Discount (%)</th>
-                        <th class="text-right">Taxes</th>
+                        <!--<th class="text-right">Taxes</th>-->
                         <th class="text-right">Amount</th>
                     </tr>
                 </thead>
@@ -68,9 +68,10 @@
                             <span t-field="l.price_unit"/>
                         </td>
                         <td class="text-right" groups="sale.group_discount_per_so_line"><span t-field="l.discount"/></td>
-                        <td class="text-right">
+                        <!-- <td class="text-right">
                             <span t-esc="', '.join(map(lambda x: x.name, l.invoice_line_tax_id))"/>
-                        </td>
+                            </td>
+			-->
                         <td class="text-right">
                             <span t-field="l.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
                         </td>
@@ -87,12 +88,22 @@
                                 <span t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Taxes</td>
+                        <!-- <tr> -->
+			   <tr t-foreach="o.tax_line" t-as="t">
+                                <td><span t-field="t.name"/></td>
+                                <td class="text-right">
+                                    <span t-field="t.base" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="t.amount" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+                                </td>
+                            </tr>
+                          <!--  <td>Taxes</td>
                             <td class="text-right">
-                                <span t-field="o.amount_tax" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
-                            </td>
-                        </tr>
+                              <span t-field="o.amount_tax" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+                              </td>
+			  -->
+                        <!-- </tr> -->
                         <tr class="border-black">
                             <td><strong>Total</strong></td>
                             <td class="text-right">
@@ -102,7 +113,7 @@
                     </table>
                 </div>
             </div>
-
+	    <!--
             <div class="row" t-if="o.tax_line">
                 <div class="col-xs-6">
                     <table class="table table-condensed">
@@ -127,7 +138,7 @@
                     </table>
                 </div>
             </div>
-
+	    -->
             <p t-if="o.comment">
                 <strong>Comment:</strong>
                 <span t-field="o.comment"/>
@@ -144,14 +155,6 @@
      </div>
     </xpath>
 </template>
-<!--
-<template id="report_invoice_custom" inherit_id="account.report_invoice">
-  <t t-call="report.html_container">
-    <t t-foreach="doc_ids" t-as="doc_id">
-      <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'account.report_invoice_document_custom')"/>
-    </t>
-  </t>
-</template>
--->
+
 </data>
 </openerp>
