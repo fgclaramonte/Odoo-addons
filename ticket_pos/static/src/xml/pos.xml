@@ -16,7 +16,6 @@
 	  
 	  <div style="border-bottom:1px solid black; margin:4px 0 2px 0;" />
 	    
-	    Shop: <t t-esc="widget.pos.shop.name"/><br />
             User: <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name"/><br />
 	    Factura simplificada: <t t-esc="order.get('name')"/><br />
             Fecha: <t t-esc="new Date().toString(Date.CultureInfo.formatPatterns.shortDate + ' ' +                                  
@@ -131,7 +130,7 @@
         <receipt align='center' width='40' value-thousands-separator='' >
 	    <img src="/ticket_pos/static/src/img/logo.png" />
 	    
-            <h1>FlorProhibida Central</h1>
+            <h1></h1>
                 <br/>
 
             <div font='b'>
