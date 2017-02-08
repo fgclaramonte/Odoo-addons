@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+  <data>
+        <template id="ticket_pos_ticket_assets_backend"
+                  name="ticket_pos_ticket_assets_backend"
+                  inherit_id="point_of_sale.assets_backend">
+          <xpath expr="." position="inside">
+            <script type="text/javascript" src="/ticket_pos/static/src/js/models.js"></script>
+
+	  </xpath>
+	</template>
+    </data>
+</openerp>
+	  
