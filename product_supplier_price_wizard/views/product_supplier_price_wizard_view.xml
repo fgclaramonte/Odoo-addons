@@ -1,0 +1,44 @@
+<openerp>
+    <data>
+
+       <record id="view_product_supplier_price_wizard" model="ir.ui.view">
+        <field name="name">Actualiza precios de productos por proveedores</field>
+        <field name="model">product.template.precios_proveedor_wizard</field>
+
+        <field name="arch" type="xml">
+
+          <form string="Actualiza precios de proveedores">
+            
+            <p class="oe_grey">
+              Se actualizarán los precios de compra de los productos por proveedor.<br/>
+	      <div>
+	      <h2>IMPORTANTE</h2> Antes hay que importar un fichero CSV con los precios y el id del producto (id, precio_proveedor)<br/>
+              Si el proveedor del producto no tiene una lista de precios se creará una nueva para cada producto.<br/><br/>
+	      </div>
+	      El botón <b>Actualiza todos</b>, actualizará todos los productos del catágolo que tengan importado previamente el "precio_proveedor".<br/>
+	      El botón <b>Actualiza selección</b>, actualizará solo los productos seleccionados.
+            </p>
+
+            <footer>
+              <button type="object" name="actualiza_todos_precios"
+                      string="Actualiza todos" class="oe_highlight" />
+	      <button type="object" name="actualiza_todos_precios"
+                      string="Actualiza selección" class="oe_highlight" />
+              <button special="cancel" string="Cancel"/>
+            </footer>  
+          </form>
+
+        </field>
+       </record>
+
+       <act_window name="Actualizar precios de proveedores"
+		   res_model="product.template.precios_proveedor_wizard"
+		   src_model="product.template"
+		   view_mode="form"
+		   target="new"
+		   multi="True"
+		   key2="client_action_multi"
+		   id="action_product_precios_proveedor_wizard" />
+       
+    </data>
+</openerp>
