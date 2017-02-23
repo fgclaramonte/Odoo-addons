@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+      <record model="ir.ui.view" id="view_pos_session_categories_form">
+	<field name="name">pos.session.form.view</field>
+	<field name="model">pos.session</field>
+	<field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+	<field name="arch" type="xml">
+	  <xpath expr="//field[@name='statement_ids']" position="after">
+	    <separator string="Pedidos por categoría de producto" attrs="{'invisible' : [('state', '=', 'opening_control')]}"/>
+	    <button string="Cargar categorías" type="object" name="carga_categorias"/>
+             <field name="order_categories_ids" attrs="{'invisible' : [('state', '=', 'opening_control')]}">
+               <tree string="Categorías" create="false" delete="false">
+                 <field name="category" />
+                 <field name="quantity" />
+                 <field name="price" />
+                 <field name="price_with_tax" />
+               </tree>
+             </field>
+
+	  </xpath>
+	</field>
+      </record>
+
+
+    </data>
+</openerp>
